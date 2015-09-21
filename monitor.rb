@@ -4,7 +4,6 @@ require 'csv'
 class DoorbotMonitor
   def initialize(ports)
     @ports = ports
-    @csv = CSV.open("logfile.csv", "a")
   end
 
   def listen(&blk)
@@ -15,8 +14,10 @@ class DoorbotMonitor
         message, _ = sock.recvfrom(255)
         event, id, _ = message.split("\n")
         if event == 'RFID'
-          @csv << [Time.now, id]
-          @csv.fsync
+	  CSV.open("logfile.csv", "a") do |csv|
+            csv << [Time.now, id]
+            csv.fsync
+          end
         end
       end
     end
