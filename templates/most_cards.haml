@@ -1,0 +1,7 @@
+%h1
+  Users with most cards
+%table
+  - @bucket.each do |nick, count|
+    %tr
+      %td= nick
+      %td= count

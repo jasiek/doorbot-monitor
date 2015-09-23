@@ -1,0 +1,7 @@
+%h1
+  Top users
+%table
+  - @bucket.each do |card, freq|
+    %tr
+      %td= card
+      %td= freq
