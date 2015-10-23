@@ -2,4 +2,5 @@
 \#*
 logfile.csv
 carddb.json
-output
+output/*.html
+

@@ -1,0 +1,22 @@
+!!! 5
+%html
+  %head
+    %script{src: 'bundle.min.js'}
+  %body
+    %h1
+      Weekday / Hour breakdown
+    #matrix
+    :javascript
+      var data = #{@matrix.to_json};
+      var processed = {rows: [], columns: []};
+      for (var i = 0; i < 24; i++) { processed.columns.push(i) };
+      var maxZ = 0;
+      Object.keys(data).forEach(function(k) {
+        processed.rows.push({name: k, values: data[k]});
+        maxZ = d3.max(maxZ, d3.max(data[k]));
+      });
+      
+      var z = d3.scale.linear().domain([0, maxZ]).range([0, 1]);
+      var chart = d3.select('#matrix').append('svg').chart('BubbleMatrix').width(960).height(300);
+      chart.draw(processed);
+
