@@ -11,13 +11,16 @@
       var data = #{@matrix.to_json};
       var processed = {rows: [], columns: []};
       for (var i = 0; i < 24; i++) { processed.columns.push(i) };
-      var maxZ = 0;
-      Object.keys(data).forEach(function(k) {
-        processed.rows.push({name: k, values: data[k]});
-        maxZ = d3.max([maxZ, d3.max(data[k])]);
-      });
+      var maxZ = Object.keys(data).reduce(function(acc, k) {
+        var max = d3.max(data[k]);
+        return max > acc ? max : acc;
+      }, 0);
       
       var z = d3.scale.linear().domain([0, maxZ]).range([0, 1]);
+      Object.keys(data).forEach(function(k) {
+        processed.rows.push({name: k, values: data[k].map(function(v) { return [z(v)]; }) });
+      });
+
       var chart = d3.select('#matrix').append('svg').chart('BubbleMatrix').width(960).height(300);
       chart.draw(processed);
 

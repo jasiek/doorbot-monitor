@@ -16,6 +16,8 @@
 
 .d3-chart-bubble-matrix .bubble circle {
     stroke: white;
+    fill: #230;
+    opacity: 0.5;
 }
 
 .d3-chart-bubble-matrix .thread {
