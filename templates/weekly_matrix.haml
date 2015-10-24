@@ -1,7 +1,8 @@
 !!! 5
 %html
   %head
-    %script{src: 'bundle.min.js'}
+    %script{src: 'weekly_matrix.min.js'}
+    %link{rel: 'stylesheet', href: 'weekly_matrix.css'}
   %body
     %h1
       Weekday / Hour breakdown
@@ -13,10 +14,11 @@
       var maxZ = 0;
       Object.keys(data).forEach(function(k) {
         processed.rows.push({name: k, values: data[k]});
-        maxZ = d3.max(maxZ, d3.max(data[k]));
+        maxZ = d3.max([maxZ, d3.max(data[k])]);
       });
       
       var z = d3.scale.linear().domain([0, maxZ]).range([0, 1]);
       var chart = d3.select('#matrix').append('svg').chart('BubbleMatrix').width(960).height(300);
       chart.draw(processed);
 
+    

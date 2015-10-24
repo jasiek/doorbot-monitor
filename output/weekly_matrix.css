@@ -1,0 +1,28 @@
+/* Base styles */
+
+.d3-chart-bubble-matrix .thread {
+    shape-rendeding: crispEdges;
+}
+
+.d3-chart-bubble-matrix .row-header text {
+    text-anchor: end;
+}
+
+.d3-chart-bubble-matrix .col-header text {
+    text-anchor: middle;
+}
+
+/* Theme */
+
+.d3-chart-bubble-matrix .bubble circle {
+    stroke: white;
+}
+
+.d3-chart-bubble-matrix .thread {
+    stroke: #e0e0e0;
+}
+
+.d3-chart-bubble-matrix text {
+    fill: #666;
+    font-size: 80%;
+}
