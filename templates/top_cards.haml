@@ -1,7 +1,34 @@
-%h1
-  Top cards scanned
-%table
-  - @bucket.each do |card, freq|
-    %tr
-      %td= card
-      %td= freq
+!!! 5
+%html
+  %head
+    %script{src: 'd3bundle.min.js'}
+    :css
+      .bar {
+        border: thin solid #00b;
+      }
+
+      table {
+      border: think solid red;
+      }
+  %body
+    %h1
+      Top cards scanned
+    #chart
+    :javascript
+      var data = #{@bucket.to_json};
+      var width = 960;
+      var height = data.length * 14;
+      var maxX = data.reduce(function(max, x) {
+        return max > x[1] ? max : x[1];
+      }, 0);
+      
+      var x = d3.scale.linear().range([0, width]);
+      var y = d3.scale.ordinal().rangePoints([0, height]);
+      var chart = d3.select('#chart').append('table');
+      y.domain(data.map(function(d) { return d[0]; }));
+      x.domain([0, maxX]);
+
+      var tr = chart.selectAll('tr').data(data).enter().append('tr');
+      tr.append('td').text(function(d) { return d[0]; });
+      tr.append('td').text(function(d) { return d[1]; });
+      tr.append('td').append('div').attr('class', 'bar').attr('width', function(d) { return x(d[1]); }).attr('height', 12);

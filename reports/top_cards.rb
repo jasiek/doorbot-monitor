@@ -16,7 +16,7 @@ class TopCards
     @csv.each do |(_, card)|
       @bucket[card] += 1
     end
-    @bucket.to_a.sort_by do |a|
+    @bucket = @bucket.to_a.sort_by do |a|
       -a.last
     end
   end
