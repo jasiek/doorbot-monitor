@@ -3,4 +3,5 @@
 logfile.csv
 carddb.json
 output/*.html
-
+session.key
+snaps
