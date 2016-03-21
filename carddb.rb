@@ -10,7 +10,7 @@ class CardDB
       h
     end
     @id_to_nick_index = @json.inject({}) do |h, entry|
-      h[entry['id']] = entry['nick']
+      h[entry['id'].to_i] = entry['nick']
       h
     end
   end
@@ -31,5 +31,9 @@ class CardDB
 
   def nick_for_id(id)
     @id_to_nick_index[id]
+  end
+
+  def id_for_card(card)
+    @cards_to_id_index[card]
   end
 end

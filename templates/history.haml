@@ -1,0 +1,17 @@
+%h1
+  History
+- (@a_week_ago..Date.today).to_a.reverse.each do |date|
+  %h3
+    = date
+  %table
+    %tr
+      %th
+        Time
+      %th
+        User
+    - @bucket[date].each do |(time, id, nick)|
+      %tr
+        %td=time
+        %td=id
+        %td=nick
+          
