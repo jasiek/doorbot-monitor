@@ -15,9 +15,9 @@ class TopUsers
   def prepare_binding
     @bucket = Hash.new 0
     @csv.each do |(_, card)|
-      @bucket[@carddb.nick_for_card(card)] += 1
+      @bucket[@carddb.id_for_card(card)] += 1
     end
-    @bucket.to_a.sort_by do |a|
+    @bucket = @bucket.to_a.sort_by do |a|
       -a.last
     end
   end

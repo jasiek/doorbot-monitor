@@ -1,7 +1,15 @@
 %h1
   Top users
 %table
-  - @bucket.each do |card, freq|
+  %tr
+    %th
+      Nick
+    %th
+      ID
+    %th
+      Frequency
+  - @bucket.each do |id, freq|
     %tr
-      %td= card
+      %td= @carddb.nick_for_id(id)
+      %td= id
       %td= freq

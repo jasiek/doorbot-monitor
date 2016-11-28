@@ -15,6 +15,14 @@ class CardDB
     end
   end
 
+  def nick_for_id(id)
+    @id_to_nick_index[id]
+  end
+
+  def id_for_card(card)
+    @cards_to_id_index[card]
+  end
+
   def nick_for_card(card)
     @id_to_nick_index[@cards_to_id_index[card]]
   end

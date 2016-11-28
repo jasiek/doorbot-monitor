@@ -8,9 +8,8 @@ require_relative 'reports/top_users'
 require_relative 'reports/history'
 
 csv = CSV.open('logfile.csv').to_a
-carddb = CardDB.new('formatted.json')
+carddb = CardDB.new('carddb.json')
 
 WeeklyMatrix.new(csv).run
 TopUsers.new(carddb, csv).run
 History.new(carddb, csv).run
-

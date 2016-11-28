@@ -30,11 +30,13 @@ class Snapshotter
 
   def notify(port, event, id)
     if event == 'RFID' && port == 50002
-      filename = Time.now.strftime("%Y-%m-%d_%H:%M_#{id}.jpg")
+      filename = Time.now.strftime("%Y-%m-%d_%H:%M:%S_#{id}.jpg")
       http = Net::HTTP.new(CAMERA_URL.host, CAMERA_URL.port)
       http.use_ssl = true
       request = Net::HTTP::Get.new(CAMERA_URL.request_uri)
       request['Cookie'] = @cookie.to_s
+
+sleep(15)
       response = http.request(request)
 
       if response.code == '200'
@@ -68,5 +70,5 @@ class DoorbotMonitor
 end
 
 if __FILE__ == $0
-  DoorbotMonitor.new([50000, 50002]).listen(CSVRecorder.new("logfile.csv"), Snapshotter.new('snaps'))
+  DoorbotMonitor.new([50000, 50001, 50002]).listen(CSVRecorder.new("logfile.csv"))
 end
